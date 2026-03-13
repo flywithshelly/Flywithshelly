@@ -1,21 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
+let stripe: Stripe | null = null;
+
 function getStripe(): Stripe {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) throw new Error('STRIPE_SECRET_KEY is not set.');
-  return new Stripe(key);
+  if (!stripe) stripe = new Stripe(key);
+  return stripe;
 }
 
 export async function POST(req: NextRequest) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
-  if (!process.env.STRIPE_SECRET_KEY) {
-    return NextResponse.json(
-      { error: 'Stripe is not configured. Please set STRIPE_SECRET_KEY.' },
-      { status: 500 }
-    );
-  }
 
   if (!siteUrl) {
     return NextResponse.json(
@@ -40,10 +36,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const stripe = getStripe();
+  let stripeClient: Stripe;
+  try {
+    stripeClient = getStripe();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Stripe configuration error.';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 
   try {
-    const session = await stripe.checkout.sessions.create({
+    const session = await stripeClient.checkout.sessions.create({
       mode: mode as 'payment' | 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${siteUrl}/success?session_id={CHECKOUT_SESSION_ID}`,

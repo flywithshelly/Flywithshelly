@@ -175,7 +175,7 @@ export default function MembershipPage() {
               <SparklesIcon />
             </div>
             <h2 className="text-xl font-bold text-gray-900">VIP</h2>
-            <p className="text-gray-400 text-sm mb-4">Ultimate access with personal coaching &amp; mentorship</p>
+            <p className="text-gray-400 text-sm mb-4">Ultimate access with personal coaching & mentorship</p>
             <div className="mb-4">
               <p className="text-3xl font-extrabold text-[#FF6B6B]">$188<span className="text-base font-medium text-gray-500">/first 2 months</span></p>
               <p className="text-sm text-gray-500 mt-0.5">Save $10! Then $99/month</p>
