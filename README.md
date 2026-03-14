@@ -1,21 +1,38 @@
 # Fly With Shelly
 
-A Next.js website for Coach Shelly's flight attendant coaching program. Features membership tier pages, Stripe-powered checkout, and a book purchase page.
+A full-featured Next.js website for Coach Shelly's flight attendant coaching program. Features all public-facing pages, Stripe-powered membership checkout, a blog, resources, contact form, and more.
 
 ## Tech Stack
 
-- **Next.js 14+** (App Router, TypeScript)
+- **Next.js 16+** (App Router, TypeScript)
 - **Tailwind CSS** for styling
-- **Stripe** for payments
+- **Stripe** for payments & subscriptions
 
 ## Pages
 
 | Route | Description |
 |---|---|
-| `/membership` | Membership tiers (Basic, Premium, VIP) |
-| `/book` | Buy the book |
-| `/success` | Post-payment success |
-| `/cancel` | Payment cancelled |
+| `/` | Home page — hero, features, how it works, testimonials |
+| `/about` | About Coach Shelly — bio, credentials, values |
+| `/membership` | Membership tiers (Basic $29/mo, Premium $49.99/mo, VIP $188/2mo) |
+| `/resources` | Free and premium resources — guides, FAQs, airline database |
+| `/blog` | Blog listing page with featured post and article cards |
+| `/blog/[slug]` | Individual blog article pages |
+| `/contact` | Contact form with sidebar info |
+| `/book` | Buy Coach Shelly's book ($29.99 one-time) |
+| `/success` | Post-payment success confirmation |
+| `/cancel` | Payment cancelled page |
+| `/privacy` | Privacy Policy |
+| `/terms` | Terms of Service |
+
+## Components
+
+| Component | Description |
+|---|---|
+| `Navbar` | Sticky top navigation with mobile hamburger menu |
+| `Footer` | Site-wide footer with links, social icons, copyright |
+| `CheckoutButton` | Stripe Checkout client button with loading state |
+| `NewsletterForm` | Email subscribe form (client component) |
 
 ## Local Development
 
@@ -66,7 +83,7 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
    - **Basic Membership** – recurring, $29/month
    - **Premium Membership** – recurring, $49.99/month
    - **VIP Membership** – create a custom pricing plan for the intro offer
-   - **Book** – one-time payment
+   - **Book** – one-time payment, $29.99
 3. After creating each product, copy the **Price ID** (starts with `price_...`)
 4. Paste each Price ID into the corresponding variable in `.env.local`
 

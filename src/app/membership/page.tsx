@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import CheckoutButton from '@/components/CheckoutButton';
+import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Membership Plans | Fly With Shelly',
+  description: 'Choose your flight attendant coaching plan — Basic, Premium, or VIP. Live coaching sessions, mock interviews, and personal mentorship with Coach Shelly.',
+};
 
 // ── Icon components ─────────────────────────────────────────────────────────
 
@@ -98,10 +105,13 @@ export default function MembershipPage() {
   const vipPriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_VIP ?? '';
 
   return (
-    <main className="min-h-screen bg-[#F9FAFB] px-4 py-12">
+    <div className="min-h-screen bg-[#F9FAFB] px-4 py-12">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
+          <span className="inline-block bg-[#FFF0F0] text-[#FF6B6B] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            Coaching Plans
+          </span>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             Choose Your Membership
           </h1>
@@ -205,7 +215,20 @@ export default function MembershipPage() {
           </div>
 
         </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <p className="text-gray-500 mb-4">
+            Not sure which plan is right for you?{' '}
+            <Link href="/contact" className="text-[#FF6B6B] font-semibold hover:underline">
+              Ask Coach Shelly
+            </Link>
+          </p>
+          <p className="text-xs text-gray-400">
+            All plans include a 7-day free trial. Cancel anytime. Secure checkout powered by Stripe.
+          </p>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
